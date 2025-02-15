@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Amor</title>
+    <style>
+        /* Estilos generales */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            flex-direction: column;
+            overflow: hidden;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4); /* Fondo degradado */
+            color: #fff; /* Texto blanco para contrastar */
+        }
+
+        /* Estilos para los botones */
+        .heart-button, .choice-button {
+            width: 220px;
+            height: 50px;
+            background-color: #ff6f61; /* Color más suave */
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            border-radius: 25px; /* Bordes más redondeados */
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Transición suave */
+        }
+
+        .heart-button:hover {
+            background-color: #ff3b2f; /* Cambio de color al pasar el mouse */
+            transform: scale(1.05); /* Efecto de escala */
+        }
+
+        /* Estilos para las pantallas */
+        .screen {
+            position: absolute;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform: translateY(100%);
+            transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
+            opacity: 0; /* Inicialmente invisible */
+        }
+
+        .screen.active {
+            transform: translateY(0);
+            opacity: 1; /* Visible cuando está activa */
+        }
+
+        /* Estilos para el texto */
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Sombra para el texto */
+        }
+
+        /* Estilos para la imagen */
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra para la imagen */
+        }
+
+        /* Estilos para los botones de elección */
+        .choice-buttons {
+            display: flex;
+            gap: 20px; /* Espacio entre los botones */
+        }
+
+        .choice-button.no {
+            background-color: #ccc; /* Color gris para el botón "No" */
+        }
+
+        .choice-button.no:hover {
+            background-color: #bbb; /* Cambio de color al pasar el mouse */
+        }
+
+        .choice-button.si {
+            transition: transform 0.5s ease; /* Transición para el botón "Sí" */
+        }
+    </style>
+</head>
+<body>
+    <!-- Pantalla 1 -->
+    <div id="pantalla1" class="screen active">
+        <h1>Ola ute</h1>
+        <img src="https://media3.giphy.com/media/v1.Y2lkPTA3MTNiODVjN2ozMzI0MWRxNHRueDd3bXN0Y3dvcnBvdGh2cXV0aXhocGVmNHJ2biZlcD12MV9naWZzX2dpZKlkJmN0PXM/VMXbE5DJU4F5D986f3/200.gif" alt="Gif divertido">
+        <button class="heart-button" onclick="mostrarPantalla('pantalla2')">Presione para continuar muajajaja</button>
+    </div>
+
+    <!-- Pantalla 2 -->
+    <div id="pantalla2" class="screen">
+        <h1>¿Ute sabe que la amo muto veda?</h1>
+        <!-- Aquí agregamos el GIF -->
+        <img src="https://scontent.cdninstagram.com/v/t39.74738-6/458389194_17863438632217634_3891277962805156435_n.webp?_nc_cat=1&ccb=1-7&_nc_sid=8ec1f7&_nc_ohc=LvXD4wehicIQ7kNvgHn8amF&_nc_oc=AdisIHTGppR-3elFpUn8FwkcyF-meqSgkh5fYVZbY3rOqQz_ngvHNw36xhcUFq-mvxs9SgBitP6Y6Cxl63e_CqZD&_nc_ad=z-m&_nc_cid=0&_nc_zt=14&_nc_ht=scontent.cdninstagram.com&_nc_gid=AlcCfhyuNP7N7Vqvvst6UUa&oh=00_AYBskuPCJz2DRoSIOgJKXGDlGgi5bVL3WN_MYZ4ia58sdQ&oe=67B5A6DF" alt="Gif romántico">
+        <div class="choice-buttons">
+            <button class="choice-button si" onclick="mostrarPantalla('pantalla3')">Sí</button>
+            <button class="choice-button no" onclick="manejarNo()">No</button>
+        </div>
+    </div>
+
+    <!-- Pantalla 3: Razones por las que la amo -->
+    <div id="pantalla3" class="screen">
+        <div class="razones-container">
+            <h1>200 razones por las que te amo ❤️</h1>
+            <div class="razon" id="razon-texto">Cargando razones...</div>
+            <button class="heart-button razon-button" onclick="mostrarSiguienteRazon()">Siguiente razón</button>
+        </div>
+    </div>
+
+    <!-- Pantalla 5 -->
+    <div id="pantalla5" class="screen">
+        <h1>Mi niña hermosa, hoy en tu cumpleaños, la verdad estoy tan alegre de poder estar en tu vida para tus 18. Me hace sentir muy orgulloso saber que tengo en mi vida a una niña tan linda, tan hermosa, una niña que se esfuerza día a día para superarse continuamente, una niña que ha superado los obstáculos que ha tenido, una niña que logra lo que se propone. Estoy muy orgulloso de ti, mi niña. Te amo, mucho mucho mucho. ❤️</h1>
+    </div>
+
+    <script>
+        // Función para cambiar de pantalla
+        function mostrarPantalla(id) {
+            document.querySelector('.screen.active').classList.remove('active');
+            document.getElementById(id).classList.add('active');
+        }
+
+        // Contador de clics en "No"
+        let contadorNo = 0;
+
+        // Función para manejar el clic en "No"
+        function manejarNo() {
+            const botonSi = document.querySelector('.choice-button.si');
+            const botonNo = document.querySelector('.choice-button.no');
+            contadorNo++;
+
+            // Aumentar el tamaño del botón "Sí"
+            const escalaActualSi = parseFloat(botonSi.style.transform.replace('scale(', '').replace(')', '')) || 1;
+            botonSi.style.transform = `scale(${escalaActualSi + 0.2})`; // Aumenta el tamaño en 0.2 cada clic
+
+            // Reducir el tamaño del botón "No"
+            const escalaActualNo = parseFloat(botonNo.style.transform.replace('scale(', '').replace(')', '')) || 1;
+            botonNo.style.transform = `scale(${escalaActualNo - 0.2})`; // Reduce el tamaño en 0.2 cada clic
+
+            // Después de 5 clics, ocultar el botón "No"
+            if (contadorNo >= 5) {
+                botonNo.style.display = 'none';
+            }
+        }
+
+        // Lista de razones (puedes agregar más)
+        const razones = [
+            "1. Porque eres la persona más especial en mi vida.",
+            "2. Porque tu sonrisa ilumina mi día.",
+            "3. Porque me haces sentir amado como nadie más.",
+            "4. Porque eres mi mejor amiga y confidente.",
+            "5. Porque contigo cada momento es único.",
+            // Agrega las 195 razones restantes aquí...
+        ];
+
+        let indiceRazon = 0;
+
+        // Función para mostrar la siguiente razón
+        function mostrarSiguienteRazon() {
+            const razonTexto = document.getElementById('razon-texto');
+            if (indiceRazon < razones.length) {
+                razonTexto.textContent = razones[indiceRazon];
+                razonTexto.classList.remove('active');
+                setTimeout(() => {
+                    razonTexto.classList.add('active');
+                }, 50);
+                indiceRazon++;
+            } else {
+                razonTexto.textContent = "¡Esas son todas las razones por las que te amo! ❤️";
+            }
+        }
+
+        // Inicializar la primera razón
+        mostrarSiguienteRazon();
+    </script>
+</body>
+</html>
